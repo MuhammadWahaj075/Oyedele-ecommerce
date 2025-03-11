@@ -1,53 +1,3 @@
-// "use client";
-// import { useState } from "react";
-// import Image from "next/image";
-// import { Menu, X, ChevronDown } from "lucide-react";
-
-// export default function Header() {
-//   const [menuOpen, setMenuOpen] = useState(false);
-//   const links = ["Home", "Stores", "Service-Stores", "Feedback"];
-//   const icons = ["heart", "shopping-cart", "user"];
-
-//   return (
-//     <header className="w-full h-[100px] px-5 sm:px-7 md:px-6 lg:px-[120px] flex items-center justify-between bg-gradient-to-r from-[#2C1F49] to-[#170F28] text-white md:bg-green-500 lg:bg-orange-400">
-//       <h1 className="text-xl font-semibold tracking-[.50em]">OYODELE</h1>
-
-//       <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-//         {menuOpen ? <X size={28} /> : <Menu size={28} />}
-//       </button>
-
-//       <nav className="hidden md:flex gap-6 text-sm">
-//         {links.map((link, i) => (
-//           <div key={link} className="flex items-center gap-1">
-//             <a href="#" className="hover:underline">{link}</a>
-//             {i > 0 && i < 3 && <ChevronDown size={18} />}
-//           </div>
-//         ))}
-//       </nav>
-
-//       <div className="hidden md:flex gap-5">
-//         {icons.map((icon) => (
-//           <Image key={icon} src={`/assets/${icon}.png`} alt={icon} width={28} height={28} />
-//         ))}
-//       </div>
-
-//       {menuOpen && (
-//         <div className="absolute top-[100px] left-0 w-full bg-[#170F28] text-white flex flex-col items-center space-y-4 py-4 md:hidden">
-//           {links.map((link) => (
-//             <a key={link} href="#" className="hover:underline">{link}</a>
-//           ))}
-//           <div className="flex gap-5 mt-4">
-//             {icons.map((icon) => (
-//               <Image key={icon} src={`/assets/${icon}.png`} alt={icon} width={28} height={28} />
-//             ))}
-//           </div>
-//         </div>
-//       )}
-//     </header>
-//   );
-// }
-
-
 "use client";
 import { useState } from "react";
 import Image from "next/image";
@@ -85,8 +35,6 @@ export default function Header() {
         <Image src="/assets/shopping-cart.png" alt="Cart" width={28} height={28} />
         <Image src="/assets/user.png" alt="Profile" width={28} height={28} />
       </div>
-
-      {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="absolute top-[100px] left-0 w-full bg-[#170F28] text-white flex flex-col items-center space-y-4 py-4 md:hidden">
           <a href="#" className="hover:underline">Home</a>

@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 export default function SearchInterface() {
-    const [searchType, setSearchType] = useState("store") // 'store' or 'service'
+    const [searchType, setSearchType] = useState("store") 
     const [selectedStore, setSelectedStore] = useState("")
     const [selectedTown, setSelectedTown] = useState("")
     const [selectedCity, setSelectedCity] = useState("")
@@ -37,14 +37,12 @@ export default function SearchInterface() {
                         Service-Store Search
                     </button>
                 </div>
-
-                {/* Dropdowns */}
                 <div className="space-y-4 w-[276] m-auto ">
                     <div className="relative">
                         <select
                             value={selectedStore}
                             onChange={(e) => setSelectedStore(e.target.value)}
-                            className="w-full p-[8px] px-[15px] rounded-3xl border-2 border-[#8B5CF6] rounded-lg appearance-none bg-white text-gray-700 cursor-pointer focus:outline-none focus:border-[#7C3AED]"
+                            className="w-full p-[8px] px-[15px] rounded-3xl border-2 border-[#8B5CF6]  appearance-none bg-white text-gray-700 cursor-pointer focus:outline-none focus:border-[#7C3AED]"
                         >
                             <option value="">Food Store</option>
                             <option value="restaurant">Restaurant</option>
@@ -76,7 +74,7 @@ export default function SearchInterface() {
                         <select
                             value={selectedCity}
                             onChange={(e) => setSelectedCity(e.target.value)}
-                            className="w-full  p-[8px] px-[15px] rounded-3xl bg-gray-100 rounded-lg appearance-none text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
+                            className="w-full  p-[8px] px-[15px] rounded-3xl bg-gray-100  appearance-none text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]"
                         >
                             <option value="">Select Store City</option>
                             <option value="city1">City 1</option>
@@ -89,7 +87,6 @@ export default function SearchInterface() {
                         />
                     </div>
                 </div>
-                {/* Search Button */}
                 <button className="w-full max-w-[160px] mx-auto mt-6 px-8 py-2 rounded-full border-2 border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white transition-colors duration-300 flex justify-center items-center">
                     Search
                 </button>
