@@ -94,7 +94,7 @@ export default function Banner() {
 
           <div className="flex-1 flex justify-center md:justify-end">
             <div className="rounded-xl p-6">
-              <div className="relative w-[356px]  h-64 bg-slate-800">
+              <div className="relative w-[356px]  h-64">
                 <Image src={scroll} alt="Gizmo Hub product" fill className="object-contain" />
               </div>
             </div>
