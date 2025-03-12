@@ -1,18 +1,16 @@
 import Image from "next/image";
+import FoodStoreResults from "./Components/FoodStoreResults/Page"
+import SearchInterface from "./Components/SearchInterface/Page";
+import Banner from "./Components/Banner/page";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="">
       <main className="flex flex-col gap-8 row-start-2 items-center">
-        <Image
-          className="dark:invert"
-          src="/vercel.svg"
-          alt="Vercel logomark"
-          width={20}
-          height={20}
-        />
-        <h1 className="text-[30px]">OYEDELE</h1>
-        coming soon...
+        <Banner />
+        {/* <SearchInterface /> */}
+        <FoodStoreResults />
+      
       </main>
     </div>
   );
