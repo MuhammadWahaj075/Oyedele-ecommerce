@@ -59,7 +59,7 @@ export default function FoodStoreResults() {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto py-8 sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] flex flex-col items-center md:items-stretch ">
       <h1 className="text-2xl font-semibold mb-6">Results For: Food Store</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -91,7 +91,7 @@ function Button({ children, className, disabled, onClick }) {
 
 function StoreCard({ store }) {
   return (
-    <div className="bg-white rounded-[18px] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
+    <div className="bg-white max-w-[349px] rounded-[18px] overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
       <div className="relative h-48 w-full">
         <Image src={store.image || "/placeholder.svg"} alt={store.name} fill className="object-cover" />
       </div>
@@ -100,25 +100,25 @@ function StoreCard({ store }) {
       <div className="p-4">
         <div className="flex justify-between items-start">
           <div>
-            <h2 className="text-lg font-semibold">{store.name}</h2>
-            <p className="text-sm text-gray-500">{store.location}</p>
+            <h2 className="text-[24px] font-[400]">{store.name}</h2>
+            <p className="text-[12px] text-[#4E4E4E]">{store.location}</p>
           </div>
           <div className="flex items-center">
-            <span className="mr-1 font-medium">{store.rating}</span>
+            <span className="mr-1 text-[14px] text-[#4E4E4E]">{store.rating}</span>
             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
           </div>
         </div>
-        <p className="mt-3 text-sm text-gray-700">
+        <p className="mt-[5px] text-[14px] text-[#4E4E4E]">
           Store Description, Store Description, Store Description, Store Description,
           <Link href="#" className="text-blue-500 hover:underline ml-1">
             Show more...
           </Link>
         </p>
       </div>
-      <div className="w-full p-[2px] rounded-full bg-gradient-to-b from-[#BE9EFF] to-[#704EB5]">
-        <Button className="w-full bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full">
+      <div className="w-full p-[2px] rounded-full bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] ">
+        <button className="w-full bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full py-2">
           Explore Store
-        </Button>
+        </button>
       </div>
 
       </div>
