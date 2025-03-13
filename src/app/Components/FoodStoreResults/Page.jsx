@@ -60,7 +60,7 @@ export default function FoodStoreResults() {
 
   return (
     <div className="container mx-auto py-8 sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] flex flex-col items-center md:items-stretch ">
-      <h1 className="text-2xl font-semibold mb-6">Results For: Food Store</h1>
+      <h1 className="text-[18px] font-[400] mb-6 text-[#4E4E4E]">Results For: Food Store</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stores.map((store) => (
@@ -110,7 +110,7 @@ function StoreCard({ store }) {
         </div>
         <p className="mt-[5px] text-[14px] text-[#4E4E4E]">
           Store Description, Store Description, Store Description, Store Description,
-          <Link href="#" className="text-blue-500 hover:underline ml-1">
+          <Link href="#" className="text-[#4E4E4E] hover:underline ml-1">
             Show more...
           </Link>
         </p>
@@ -127,37 +127,76 @@ function StoreCard({ store }) {
   )
 }
 
+// function Pagination() {
+//   const pages = [1, 2, 3, 4, 5]
+//   const currentPage = 1
+
+//   return (
+//     <div className="flex items-center gap-2">
+//       <Button
+//         className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+//         disabled={currentPage === 1}
+//       >
+//         <span className="text-sm">Previous</span>
+//       </Button>
+
+//       {pages.map((page) => (
+//         <Button
+//           key={page}
+//           className={`w-8 h-8 p-0 flex items-center justify-center ${currentPage === page
+//             ? "bg-purple-600 text-white hover:bg-purple-700"
+//             : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+//             }`}
+//         >
+//           {page}
+//         </Button>
+//       ))}
+
+//       <Button
+//         className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+//         disabled={currentPage === pages.length}
+//       >
+//         <span className="text-sm">Next</span>
+//       </Button>
+//     </div>
+//   )
+// }
+
+
 function Pagination() {
   const pages = [1, 2, 3, 4, 5]
   const currentPage = 1
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between w-[531px] h-[53px] bg-[#FEFEFE] shadow-md rounded-full px-[30px] border border-[#F5F1FF]">
       <Button
-        className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+        className="flex items-center text-gray-700 hover:text-purple-600"
         disabled={currentPage === 1}
       >
-        <span className="text-sm">Previous</span>
+        <span className="text-sm">‹ Previous</span>
       </Button>
 
-      {pages.map((page) => (
-        <Button
-          key={page}
-          className={`w-8 h-8 p-0 flex items-center justify-center ${currentPage === page
-            ? "bg-purple-600 text-white hover:bg-purple-700"
-            : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
-            }`}
-        >
-          {page}
-        </Button>
-      ))}
+      <div className="flex gap-2">
+        {pages.map((page) => (
+          <button
+            key={page}
+            className={`w-8 h-8 p-0 flex items-center justify-center rounded-full text-sm font-medium transition-all
+            ${currentPage === page
+                ? "border border-purple-600 text-purple-600"
+                : "text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
 
-      <Button
-        className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      <button
+        className="flex items-center text-gray-700 hover:text-purple-600"
         disabled={currentPage === pages.length}
       >
-        <span className="text-sm">Next</span>
-      </Button>
+        <span className="text-sm">Next ›</span>
+      </button>
     </div>
   )
 }
