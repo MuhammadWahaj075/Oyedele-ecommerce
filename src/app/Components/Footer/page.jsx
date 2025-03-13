@@ -5,8 +5,9 @@ import LogoGit from "../../../../public/assets/LogoGit.svg";
 import LogoInsta from "../../../../public/assets/LogoInsta.svg";
 export default function Footer() {
   return (
-    <div className="bg-[#170F28] text-white   sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] xl:px-[120px] ">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
+    // bg-red-400 lg:bg-green-400 md:bg-orange-400 sm:bg-purple-400
+    <div className=" bg-[#170F28] text-white sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] lg:px-[80px] xl:px-[120px] ">
+      <div className="max-w-7xl mx-auto flex flex-col gap-5 md:flex-row justify-between items-start">
         <div className="md:w-1/3 mb-6 md:mb-0">
           <h2 className="text-[30px] font-semibold text-[#F5F1FF] tracking-[.50em]">
             OYEDELE
@@ -16,11 +17,11 @@ export default function Footer() {
             industry. Lorem Ipsum has been the industry.
           </p>
         </div>
-        <div className="md:w-1/3 mb-6 md:mb-0">
+        <div className=" mb-6 md:mb-0 bg-slate-600">
           <h3 className="text-[18px] text-[#F5F1FF] font-[500] mb-2">
             Quick Links
           </h3>
-          <ul className="text-sm text-gray-400 space-y-2 ">
+          <ul className="text-sm text-gray-400 flex flex-wrap gap-[58.75] items-center ">
             <li>
               <a href="#" className="hover:text-gray-300 text-[#D2BCFF]">
                 Web Chat
