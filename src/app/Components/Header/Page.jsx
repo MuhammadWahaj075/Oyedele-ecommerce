@@ -12,7 +12,6 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    // bg-red-400 lg:bg-green-400 md:bg-orange-400 sm:bg-purple-400
     <header className="bg-gradient-to-r from-[#2C1F49] to-[#170F28] w-full py-[13.5px] sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] xl:px-[120px] flex items-center justify-between text-white  ">
       <Link href={'/'} className="text-xl flex justify-center items-center font-[600] min-h-[37px] tracking-[.50em]">OYODELE</Link>
 

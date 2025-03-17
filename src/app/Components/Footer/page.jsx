@@ -5,9 +5,8 @@ import LogoGit from "../../../../public/assets/LogoGit.svg";
 import LogoInsta from "../../../../public/assets/LogoInsta.svg";
 export default function Footer() {
   return (
-    // bg-red-400 lg:bg-green-400 md:bg-orange-400 sm:bg-purple-400
-    <div className=" bg-[#170F28] text-white sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] lg:px-[80px] xl:px-[120px] ">
-      <div className="max-w-7xl mx-auto flex flex-col gap-5 md:flex-row justify-between items-start">
+    <div className=" bg-[#170F28] text-white sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] xl:px-[120px] ">
+      <div className=" mx-auto flex flex-col gap-5 md:flex-row justify-between items-start">
         <div className="md:w-1/3 mb-6 md:mb-0">
           <h2 className="text-[30px] font-semibold text-[#F5F1FF] tracking-[.50em]">
             OYEDELE
@@ -17,7 +16,7 @@ export default function Footer() {
             industry. Lorem Ipsum has been the industry.
           </p>
         </div>
-        <div className=" mb-6 md:mb-0 bg-slate-600">
+        {/* <div className=" mb-6 md:mb-0 ">
           <h3 className="text-[18px] text-[#F5F1FF] font-[500] mb-2">
             Quick Links
           </h3>
@@ -48,8 +47,62 @@ export default function Footer() {
               </a>
             </li>
           </ul>
+        </div> */}
+
+        <div className="md:w-1/2">
+          <h3 className="text-lg font-medium mb-4 text-white">
+            Quick Links
+          </h3>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                Web Chat
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                Terms of use
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                Privacy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                GDPR Policy
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                Cookies Settings
+              </a>
+            </li>
+            <li>
+              <a href="#" className="text-[#D2BCFF] hover:text-white text-sm">
+                Contact Us
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
+
+      <div className="py-12 mb-6 relative mt-[50px]">
+        <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+          <span className="text-[120px] md:text-[180px] font-bold tracking-[100px]">
+            OYEDELE
+          </span>
+        </div>
+      </div>
+
+
+
       <div className="mt-10 flex flex-col md:flex-row justify-between items-center border-t border-gray-700 pt-6">
         <p className="text-[12px] text-[400] text-[#9064E8] tracking-widest">
           © COPYRIGHT 2023, ALL RIGHTS RESERVED BY OYEDELE

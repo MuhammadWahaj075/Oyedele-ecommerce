@@ -2,26 +2,24 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 export default function SearchInterface() {
-    const [searchType, setSearchType] = useState("store") 
+    const [searchType, setSearchType] = useState("store")
     const [selectedStore, setSelectedStore] = useState("")
     const [selectedTown, setSelectedTown] = useState("")
     const [selectedCity, setSelectedCity] = useState("")
     return (
-        <div className="min-h-screen w-full flex flex-col items-center justify-center p-4">
+        <div className="mt-6 w-full flex flex-col items-center justify-center p-4">
             <div className="w-full mx-auto space-y-8 bg-red/700">
                 <div className="w-full ">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-semibold text-[#8B5CF6] mb-8">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl text-center font-[400] text-[#8B5CF6] mb-8">
                         What Are You Looking For?
                     </h1>
                 </div>
-
-           
-                <div className="flex p-2 bg-gray-100 rounded-full w-full max-w-md mx-auto shadow-inner shadow-black/20">
+                <div className=" flex p-[12px] gap-[10px] h-[70px] bg-[#FEFEFE] rounded-full w-full max-w-[379px] mx-auto shadow-inner shadow-black/20">
                     <button
                         onClick={() => setSearchType("store")}
-                        className={`flex-1 py-2 w-[130px] rounded-full text-sm md:text-base transition-all ${searchType === "store"
-                                ? "bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] text-white shadow-[inset_0_1px_6.1px_0_rgba(0,0,0,0.2)]"
-                                : "text-gray-600 hover:text-gray-800"
+                        className={`py-2  w-[130px] rounded-full text-sm md:text-base transition-all ${searchType === "store"
+                            ? "bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] text-white shadow-[inset_0_1px_6.1px_0_rgba(0,0,0,0.2)]"
+                            : "text-gray-600 hover:text-gray-800"
                             }`}
                     >
                         Store Search
@@ -29,7 +27,7 @@ export default function SearchInterface() {
 
                     <button
                         onClick={() => setSearchType("service")}
-                        className={`flex-1 py-2 px-4 rounded-full text-sm md:text-base transition-all ${searchType === "service"
+                        className={`flex-1 py-2 px-4 bg-[#ECECEC] rounded-full text-sm md:text-base transition-all ${searchType === "service"
                             ? "bg-[#8B5CF6] text-white shadow-[inset_0_1px_6.1px_0_rgba(0,0,0,0.2)]"
                             : "text-gray-600 hover:text-gray-800"
                             }`}
@@ -87,9 +85,11 @@ export default function SearchInterface() {
                         />
                     </div>
                 </div>
-                <button className="w-full max-w-[160px] mx-auto mt-6 px-8 py-2 rounded-full border-2 border-[#8B5CF6] text-[#8B5CF6] hover:bg-[#8B5CF6] hover:text-white transition-colors duration-300 flex justify-center items-center">
-                    Search
-                </button>
+                <div className="max-w-[97px] p-[2px] rounded-full bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] mx-auto">
+                    <button className="w-full bg-white hover:bg-purple-200 text-purple-600 rounded-full py-2">
+                        Search
+                    </button>
+                </div>
             </div>
         </div>
     )

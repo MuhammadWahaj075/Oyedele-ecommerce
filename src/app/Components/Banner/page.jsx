@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 import BannerCarousel from "../../../../public/assets/BannerCarousel.png";
 import BannerCarousel1 from "../../../../public/assets/BannerCarousel1.svg";
 import bannerCarousel2 from "../../../../public/assets/bannerCarousel2.svg";
-
+import demo2 from "../../../../public/assets/demo2.jpg";
 import BannerBgImage from "../../../../public/assets/BannerBgimage.svg";
 import BannerBgImage2 from "../../../../public/assets/bannerImage2.svg";
 import BannerBgImage3 from "../../../../public/assets/bannerImage3.svg";
@@ -19,9 +19,9 @@ export default function Banner() {
   const [selectedImage, setSelectedImage] = useState(0);
 
   const images = [
-    { src: BannerCarousel1, alt: "Product view 1" },
     { src: BannerCarousel, alt: "Product view 2" },
-    { src: bannerCarousel2, alt: "Product view 2" },
+    { src: BannerCarousel, alt: "Product view 2" },
+    { src: BannerCarousel, alt: "Product view 2" },
   ];
 
   const backgroundImages = [
@@ -75,7 +75,6 @@ export default function Banner() {
           backgroundImage: `url(${backgroundImages[prevSlide]})`,
         }}
       />
-
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
         style={{
@@ -83,20 +82,18 @@ export default function Banner() {
           opacity: 1,
         }}
       />
-
       <div className="w-full mx-auto relative px-[24px] sm:px-[24px] md:px-[45px] xl:px-[120px] py-[96.5] z-10">
         <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center relative z-10">
           <div className="flex-1">
             <div className="flex items-center gap-2.5 justify-center md:justify-start ">
-              {[0, 1, 2].map((index) => (
+              {[0, 1, 2, 3].map((index) => (
                 <button
                   key={index}
                   onClick={() => handleSlideChange(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    currentSlide === index
-                      ? "bg-gradient-to-t from-[#704EB5] to-[#D2BCFF]"
-                      : "bg-[#D2BCFF] hover:bg-[#B68EFF]"
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
+                    ? "bg-gradient-to-t from-[#704EB5] to-[#D2BCFF]"
+                    : "bg-[#D2BCFF] hover:bg-[#B68EFF]"
+                    }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
               ))}
@@ -116,8 +113,10 @@ export default function Banner() {
               </p>
               <button
                 className={`group relative flex items-center justify-center gap-2 rounded-full px-[20px] py-2 text-white transition-all duration-300
-                    bg-gradient-to-b from-[#BE9EFF] to-[#704EB5]
-                    shadow-lg hover:shadow-xl lg:max-w-[187px] md:max-w-[172px] max-w-[157px] mt-[25px] w-full`}
+    bg-gradient-to-b from-[#BE9EFF] to-[#704EB5]
+    shadow-[0px_1px_2px_rgba(0,0,0,0.2),0px_4px_4px_rgba(0,0,0,0.2)]
+    hover:shadow-[0px_1px_2px_rgba(0,0,0,0.3),0px_4px_4px_rgba(0,0,0,0.3)]
+    lg:max-w-[187px] md:max-w-[172px] max-w-[157px] mt-[25px] w-full`}
               >
                 <span className="lg:text-[18px] md:text-[16px] text-[14px] font-medium">
                   Explore Store
@@ -129,6 +128,7 @@ export default function Banner() {
                   height={24}
                 />
               </button>
+
               <div className="relative hidden md:block h-[217px] bg-white/50 backdrop-blur-[38.5px] shadow-lg rounded-[22px] p-6 mt-9">
                 <p className="text-[#000000] font-[600] text-[26px] h-[36px] flex items-center gap-[5px]">
                   +150{" "}
@@ -164,9 +164,9 @@ export default function Banner() {
             </div>
           </div>
 
-          <div className="flex-1 flex justify-center md:justify-end">
-            <div className="flex gap-4">
-              <div className="relative w-[356px] md:h-[440px] h-[302px]">
+          <div className="flex-1 flex justify-center md:justify-end ">
+            <div className="flex md:flex-row flex-col md:gap-4 gap-[0px] ">
+              <div className="relative w-[231px] h-[300px] md:w-[356px] md:h-[440px] ">
                 <Image
                   src={images[selectedImage].src || "/placeholder.svg"}
                   alt={images[selectedImage].alt}
@@ -176,15 +176,14 @@ export default function Banner() {
                 />
               </div>
 
-              <div className="flex flex-col justify-center gap-2 ">
+              <div className="flex flex-row md:flex-col justify-center md:gap-2 ">
                 {images.map((image, index) => (
                   <div
                     key={index}
-                    className={`relative w-[55px] h-[70px]  cursor-pointer border-2 rounded ${
-                      selectedImage === index
-                        ? "border-purple-500"
-                        : "border-transparent"
-                    }`}
+                    className={`relative w-[55px] h-[70px]  cursor-pointer border-2   ${selectedImage === index
+                      ? "border-none"
+                      : "border-transparent"
+                      }`}
                     onClick={() => setSelectedImage(index)}
                   >
                     <Image
@@ -196,6 +195,7 @@ export default function Banner() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
