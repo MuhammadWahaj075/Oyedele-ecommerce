@@ -93,7 +93,7 @@ export default function TestimonialsCarousel() {
             <span className="sr-only">Previous</span>
           </button>
 
-          <div className="flex justify-center items-center gap-4 md:gap-6 w-full overflow-hidden px-4 bg-green-300 ">
+          <div className="flex justify-center items-center gap-4 md:gap-6 w-full overflow-hidden px-4">
             {visibleTestimonials.map((testimonial, index) => {
               const isActive = !isMobile && index === 1
 
