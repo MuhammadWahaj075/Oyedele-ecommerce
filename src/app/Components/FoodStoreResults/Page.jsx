@@ -60,7 +60,7 @@ export default function FoodStoreResults() {
 
   return (
     <div className="container mx-auto py-8 sm:py-[29px] px-[24px] sm:px-[24px] md:px-[45px] flex flex-col items-center md:items-stretch ">
-      <h1 className="text-2xl font-semibold mb-6">Results For: Food Store</h1>
+      <h1 className="text-[18px] font-[400] mb-6 text-[#4E4E4E]">Results For: Food Store</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stores.map((store) => (
@@ -97,29 +97,29 @@ function StoreCard({ store }) {
       </div>
       <div className="ml-[25px] mr-[25px] mb-[15px]">
 
-      <div className="p-4">
-        <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-[24px] font-[400]">{store.name}</h2>
-            <p className="text-[12px] text-[#4E4E4E]">{store.location}</p>
+        <div className="p-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-[24px] font-[400]">{store.name}</h2>
+              <p className="text-[12px] text-[#4E4E4E]">{store.location}</p>
+            </div>
+            <div className="flex items-center">
+              <span className="mr-1 text-[14px] text-[#4E4E4E]">{store.rating}</span>
+              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+            </div>
           </div>
-          <div className="flex items-center">
-            <span className="mr-1 text-[14px] text-[#4E4E4E]">{store.rating}</span>
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-          </div>
+          <p className="mt-[5px] text-[14px] text-[#4E4E4E]">
+            Store Description, Store Description, Store Description, Store Description,
+            <Link href="#" className="text-[#4E4E4E] hover:underline ml-1">
+              Show more...
+            </Link>
+          </p>
         </div>
-        <p className="mt-[5px] text-[14px] text-[#4E4E4E]">
-          Store Description, Store Description, Store Description, Store Description,
-          <Link href="#" className="text-blue-500 hover:underline ml-1">
-            Show more...
-          </Link>
-        </p>
-      </div>
-      <div className="w-full p-[2px] rounded-full bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] ">
-        <button className="w-full bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full py-2">
-          Explore Store
-        </button>
-      </div>
+        <div className="w-full p-[2px] rounded-full bg-gradient-to-b from-[#BE9EFF] to-[#704EB5] ">
+          <button className="w-full bg-purple-100 hover:bg-purple-200 text-purple-600 rounded-full py-2">
+            Explore Store
+          </button>
+        </div>
 
       </div>
 
@@ -127,37 +127,40 @@ function StoreCard({ store }) {
   )
 }
 
+
+
 function Pagination() {
   const pages = [1, 2, 3, 4, 5]
   const currentPage = 1
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between w-[345px] md:w-[531px] h-[53px] bg-[#FEFEFE] shadow-md rounded-full px-[30px] border border-[#F5F1FF]">
       <Button
-        className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+        className="flex items-center text-gray-700 hover:text-purple-600"
         disabled={currentPage === 1}
       >
-        <span className="text-sm">Previous</span>
+        <span className="text-sm hidden md:flex">‹ Previous</span>
       </Button>
-
-      {pages.map((page) => (
-        <Button
-          key={page}
-          className={`w-8 h-8 p-0 flex items-center justify-center ${currentPage === page
-            ? "bg-purple-600 text-white hover:bg-purple-700"
-            : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
-            }`}
-        >
-          {page}
-        </Button>
-      ))}
-
-      <Button
-        className="flex items-center gap-1 px-3 border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+      <div className="flex gap-2">
+        {pages.map((page) => (
+          <button
+            key={page}
+            className={`w-8 h-8 p-0 flex items-center justify-center rounded-full text-sm font-medium transition-all
+            ${currentPage === page
+                ? "border border-purple-600 text-purple-600"
+                : "text-gray-700 hover:bg-gray-100"
+              }`}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
+      <button
+        className="flex items-center text-gray-700 hover:text-purple-600"
         disabled={currentPage === pages.length}
       >
-        <span className="text-sm">Next</span>
-      </Button>
+        <span className="text-sm hidden md:flex">Next ›</span>
+      </button>
     </div>
   )
 }
