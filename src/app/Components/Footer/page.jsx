@@ -51,21 +51,21 @@ export default function Footer() {
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start mb-10 lg:mb-16">
           <div className="mb-10 lg:mb-0 lg:max-w-sm text-center lg:text-left">
-            <h2 className="text-2xl md:text-3xl font-light tracking-[0.3em]  mb-4 md:mb-6">
-              O Y E D E L E
+            <h2 className="text-2xl text-[#F5F1FF] font-[montserrat] uppercase md:text-3xl font-semibold tracking-[0.3em] mb-4 md:mb-6">
+              OyeDele
             </h2>
-            <p className="text-sm text-[#D2BCFF] leading-relaxed max-w-xs mx-auto lg:mx-0">
+            <p className="text-sm font-[inter]  text-[#D2BCFF] leading-relaxed max-w-xs mx-auto lg:mx-0">
               OyeDele is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry.
             </p>
           </div>
 
           <div className="w-full lg:w-auto text-center lg:text-left">
-            <h3 className="text-lg md:text-xl font-medium mb-4 md:mb-6">
+            <h3 className="text-lg text-[#F5F1FF] font-[poppins] md:text-xl font-medium mb-4 md:mb-6">
               Quick Links
             </h3>
-            <div className="flex flex-col gap-3 lg:hidden">
-            <a href="#" className="hover:text-purple-300 transition-colors">
+            <div className="flex flex-col gap-3 text-[14px] font-[inter] lg:hidden">
+              <a href="#" className="hover:text-purple-300 transition-colors">
                 About Us
               </a>
               <a href="#" className="hover:text-purple-300 transition-colors">
@@ -87,7 +87,7 @@ export default function Footer() {
                 Contact Us
               </a>
             </div>
-            <div className="hidden lg:flex lg:flex-row flex-wrap gap-10 text-base">
+            <div className="hidden text-[#E1D2FF] lg:flex lg:flex-row flex-wrap gap-6 text-[14px] font-[inter] ">
 
               <a href="#" className="hover:text-purple-300 transition-colors">
                 Web Chat
@@ -108,20 +108,20 @@ export default function Footer() {
           </div>
         </div>
 
-        
+
 
         <div>
           <div className="w-full h-px bg-[#3a2a56] my-8"></div>
 
           <div className="flex flex-col-reverse gap-[26px] md:flex-row justify-between items-center">
-            <p className="text-xs text-[#9064E8] mb-6 md:mb-0 tracking-wider uppercase">
+            <p className="text-xs font-[poppins] text-[#9064E8] mb-6 md:mb-0 tracking-wider uppercase">
               © Copyright 2022, All Rights Reserved by OYEDELE
             </p>
             <div className="flex gap-3">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-[#3a2a56] flex items-center justify-center
-                 hover:bg-purple-600 transition-colors"
+                className="w-10 h-10 rounded-full  flex items-center justify-center
+                 bg-[#704EB5] transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -134,7 +134,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-[#3a2a56] flex items-center justify-center hover:bg-purple-600 transition-colors"
+                className="w-10 h-10 rounded-full  flex items-center justify-center bg-[#704EB5] transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -147,7 +147,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-[#3a2a56] flex items-center justify-center hover:bg-purple-600 transition-colors"
+                className="w-10 h-10 rounded-full  flex items-center justify-center bg-[#704EB5] transition-colors"
               >
                 <svg
                   className="w-5 h-5"
@@ -160,9 +160,9 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-[#3a2a56] flex items-center justify-center hover:bg-purple-600 transition-colors"
+                className="w-10 h-10 rounded-full  flex items-center justify-center bg-[#704EB5] transition-colors"
               >
-              <Image src={gitIcon} alt='git-icon' />
+                <Image src={gitIcon} alt='git-icon' />
               </a>
             </div>
           </div>
