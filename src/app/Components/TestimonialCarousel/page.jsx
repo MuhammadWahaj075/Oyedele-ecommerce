@@ -22,7 +22,6 @@ export default function TestimonialsSection() {
   const [startX, setStartX] = useState(0);
   const [deltaX, setDeltaX] = useState(0);
   const [products, setProducts] = useState([]);
-  console.log("🚀 ~ TestimonialsSection ~ products:", products)
   const [isDragging, setIsDragging] = useState(false);
   const productEndpoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/master/entries?access_token=${process.env.NEXT_PUBLIC_CONTENT_DELIVERY_ACCESS_TOKEN}`
 
