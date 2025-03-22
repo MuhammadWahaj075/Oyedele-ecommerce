@@ -1,153 +1,269 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-import Image from "next/image"
+import { useState, useEffect, use } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import Ellipse from "../../../../public/assets/Ellipse.svg";
+import UserImg from "../../../../public/assets/bannerUser3.svg";
 
-export default function TestimonialsCarousel() {
-  const [activeIndex, setActiveIndex] = useState(1)
-  const [isMobile, setIsMobile] = useState(false)
+
+const testimonials = Array(10)
+  .fill(null)
+  .map((_, index) => ({
+    name: `Jacob Paul`,
+    rating: 4.8,
+    daysAgo: 1 + (index % 30),
+    text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, GizmoHub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!.",
+  }));
+
+export default function TestimonialsSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [deltaX, setDeltaX] = useState(0);
+  const [products, setProducts] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const productEndpoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/master/entries?access_token=${process.env.NEXT_PUBLIC_CONTENT_DELIVERY_ACCESS_TOKEN}`
+
+
+  async function fetchProducts() {
+    const response = await fetch(productEndpoint);
+    const data = await response.json();
+    return data;
+  }
 
   useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    async function getProducts() {
+      const data = await fetchProducts();
+      setProducts(data.items || []);
     }
+    getProducts();
+  }, []);
 
-    checkIfMobile()
-    window.addEventListener("resize", checkIfMobile)
+  const desktopCardWidth = 552;
+  const cardSpacing = 570;
 
-    return () => {
-      window.removeEventListener("resize", checkIfMobile)
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 660);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const nextSlide = () => {
+    setActiveIndex((prev) =>
+      prev === testimonials.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setActiveIndex((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1
+    );
+  };
+
+  const handleDragStart = (e) => {
+    const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+    setStartX(clientX);
+    setIsDragging(true);
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+    setDeltaX(clientX - startX);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    const threshold = 100;
+    if (deltaX > threshold) {
+      setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    } else if (deltaX < -threshold) {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }
-  }, [])
+    setIsDragging(false);
+    setDeltaX(0);
+  };
 
-  const testimonials = [
-    {
-      id: 1,
-      name: "John Smith",
-      rating: 4.8,
-      text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, Gizmohub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!",
-      productName: "Product Name",
-    },
-    {
-      id: 2,
-      name: "John",
-      rating: 4.8,
-      text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, Gizmohub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!",
-      productName: "Product Name",
-    },
-    {
-      id: 3,
-      name: "Johny",
-      rating: 4.8,
-      text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, Gizmohub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!",
-      productName: "Product Name",
-    },
-    {
-      id: 4,
-      name: "John Smith",
-      rating: 4.8,
-      text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, Gizmohub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!",
-      productName: "Product Name",
-    },
-  ]
-
-  const handlePrev = () => {
-    setActiveIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1))
+  if (products.length === 0) {
+    return <div>Loading...</div>;
   }
-
-  const handleNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1))
-  }
-
-  const getVisibleTestimonials = () => {
-    if (isMobile) {
-      return [testimonials[activeIndex]]
-    }
-
-    const prev = activeIndex === 0 ? testimonials.length - 1 : activeIndex - 1
-    const next = activeIndex === testimonials.length - 1 ? 0 : activeIndex + 1
-
-    return [testimonials[prev], testimonials[activeIndex], testimonials[next]]
-  }
-
-  const visibleTestimonials = getVisibleTestimonials()
 
   return (
-    <div className="w-full mx-auto px-4 py-12 relative">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-purple-600">Testimonials</h2>
-      </div>
+    <section className="py-8 md:py-16 relative overflow-hidden">
+      <h2 className="text-[24px]  z-20 absolute left-0 right-0 md:text-[40px] 
+        font-[poppins] font-normal text-center bg-gradient-to-r from-[#BE9EFF]
+         to-[#704EB5] bg-clip-text text-transparent">
+        Testimonials
+      </h2>
 
-      <div className="relative ">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-100 via-purple-200 to-purple-100 rounded-xl opacity-50"></div>
 
-        <div className="relative flex items-center justify-center py-8 ">
-          <button
-            variant="ghost"
-            size="icon"
-            className="absolute left-0 md:left-4 z-10 bg-white/80 hover:bg-white rounded-full shadow-md"
-            onClick={handlePrev}
-          >
-            <ChevronLeft className="h-6 w-6" />
-            <span className="sr-only">Previous</span>
-          </button>
+      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
+        <div className="relative">
 
-          <div className="flex justify-center items-center gap-4 md:gap-6 w-full overflow-hidden px-4">
-            {visibleTestimonials.map((testimonial, index) => {
-              const isActive = !isMobile && index === 1
+          {!isMobile && (
+            <div className="max-w-[660px] mt-10 w-full lg:flex hidden justify-between items-center absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div
+                className="flex justify-center cursor-pointer items-center bg-white rounded-full shadow-md h-12 w-12"
+                onClick={prevSlide}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </div>
+              <div
+                className="flex justify-center cursor-pointer items-center bg-white rounded-full shadow-md h-12 w-12"
+                onClick={nextSlide}
+              >
+                <ChevronRight className="h-6 w-6" />
+              </div>
+            </div>
+          )}
 
-              return (
-                <div
-                  key={testimonial.id}
-                  className={`
-                    transition-all duration-300 ease-in-out
-                    ${isActive || isMobile ? "w-full md:w-[552px] z-10 scale-100 opacity-100" : "w-[250px] scale-90 opacity-60"}
-                    ${isActive || isMobile ? "bg-white shadow-lg" : "bg-white/80"}
-                    rounded-lg p-4 md:p-6 flex flex-col
-                    
-                  `}
-                >
-                  <div className="text-center mb-2">
-                    <p className="text-sm md:text-base font-medium text-gray-600">{testimonial.productName}</p>
-                  </div>
-
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden bg-purple-100">
-                      <Image
-                        src="/placeholder.svg?height=40&width=40"
-                        alt={testimonial.name}
-                        width={40}
-                        height={40}
-                        className="object-cover"
-                      />
+          {isMobile ? (
+            <div className="overflow-hidden mt-10">
+              <div
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+              >
+                {products.map((product, index) => (
+                  // const { fields } = product;
+                  <div key={index} className="w-full h-[400px] flex-shrink-0 px-2 relative">
+                    {activeIndex === index && (
+                      <div className="absolute left-0 inset-0 flex justify-center items-center pointer-events-none z-0">
+                        <Image
+                          src={Ellipse}
+                          alt="Active Card Shadow"
+                          className="object-contain"
+                        />
+                      </div>
+                    )}
+                    <div
+                      className={`bg-white rounded-3xl shadow-xl p-6 relative z-10 transition-all duration-300 ${activeIndex === index
+                        ? "shadow-[0_0_25px_rgba(112,78,181,0.4)] opacity-100 scale-100"
+                        : "shadow-md opacity-70 scale-95"
+                        }`}
+                    >
+                      <h3 className="text-xl font-[poppins] font-medium mb-4">
+                        {product.fields?.productName || "Product Name"}
+                      </h3>
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 rounded-full overflow-hidden mr-3 bg-[#f0f8ff]">
+                          <Image src={product?.avatar || UserImg} alt={product?.name || "User"} />
+                        </div>
+                        <div className="flex items-center">
+                          <span className="font-medium font-[poppins] mr-2">
+                            {product?.fields.profileName || "User Name"}
+                          </span>
+                          <span className="text-sm font-[poppins]">
+                            {product?.fields.rating || "4.8"}
+                          </span>
+                          <span className="text-yellow-400 ml-1">★</span>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 font-[inter] text-sm">
+                        {product?.fields.description || "Product review text goes here."}
+                      </p>
                     </div>
-                    <div>
-                      <p className="font-medium">{testimonial.name}</p>
-                      <div className="flex items-center">
-                        <span className="text-sm font-medium mr-1">{testimonial.rating}</span>
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  </div>
+                ))}
+              </div>
+              <div className="flex justify-center">
+                {products.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    className={`h-3 w-3 mx-1 rounded-full 
+                      ${activeIndex === index ? "bg-[#9370DB]" : "bg-[#d8c8ff]"
+                      }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div
+              className="relative w-full h-[400px]"
+              onMouseDown={handleDragStart}
+              onMouseMove={handleDragMove}
+              onMouseUp={handleDragEnd}
+              onMouseLeave={handleDragEnd}
+              onTouchStart={handleDragStart}
+              onTouchMove={handleDragMove}
+              onTouchEnd={handleDragEnd}
+            >
+              <div className="absolute w-full mt-10 h-full flex items-center justify-center">
+                {products.map((product, index) => {
+                  const { fields } = product;
+                  let distance = index - activeIndex;
+                  const totalSlides = products.length;
+                  if (distance > totalSlides / 2) {
+                    distance -= totalSlides;
+                  } else if (distance < -totalSlides / 2) {
+                    distance += totalSlides;
+                  }
+                  const xPos = distance * 570 + (isDragging ? deltaX : 0);
+                  return (
+                    <div
+                      key={product.sys.id}
+                      className="absolute transition-all duration-300"
+                      style={{
+                        transform: `translateX(${xPos}px)`,
+                        transformOrigin: "left center",
+                        zIndex: distance === 0 ? 10 : 5,
+                        opacity: Math.abs(distance) <= 2 ? 1 : 0,
+                        width: 552,
+                      }}
+                    >
+                      <div className="relative">
+                        {distance === 0 && (
+                          <div className="absolute top-0 left-0 inset-0 flex justify-center items-center pointer-events-none">
+                            <Image src={Ellipse} alt="Active Card Shadow" className="object-contain" />
+                          </div>
+                        )}
+                        <div
+                          className={`relative z-10 mx-auto backdrop-blur-3xl bg-white rounded-3xl p-6 transition-all duration-300 ${distance === 0
+                              ? "shadow-[0_0_25px_rgba(112,78,181,0.4)] opacity-100 !bg-[#F5F1FF] flex justify-center flex-col !w-[552px] h-[261px]"
+                              : "shadow-md opacity-70 w-full max-w-[428px]"
+                            }`}
+                        >
+                          <div className="flex flex-col">
+                            <h3 className="text-[25px] font-[poppins] font-normal ">
+                              {fields?.productName || "Product Name"}
+                            </h3>
+                            <h5 className="text-sm text-[#6B6B6B] font-[poppins] font-normal mb-4">
+                              {fields?.storeName || "Store Name"}
+                            </h5>
+                          </div>
+                          <div className="flex items-center mb-4">
+                            <div className="w-12 h-12 rounded-full overflow-hidden mr-3 bg-[#f0f8ff]">
+                              <Image src={fields?.avatar || UserImg} alt={fields?.name || "User"} />
+                            </div>
+                            <div className="flex items-center">
+                              <span className="text-[20px] font-[poppins] font-normal mr-2">
+                                {fields?.profileName || "User Name"}
+                              </span>
+                              <span className="text-[16px] font-[inter] font-normal">
+                                {fields?.rating || "4.8"}
+                              </span>
+                              <span className="text-yellow-400 ml-1">★</span>
+                            </div>
+                          </div>
+                          <p className="text-gray-600 truncate max-w-[900px]  font-[inter] text-sm">
+                            {fields?.description || "Product review text goes here."}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <p className="text-sm text-gray-600 line-clamp-4">{testimonial.text}</p>
-                </div>
-              )
-            })}
-          </div>
-
-          <button
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 md:right-4 z-10 bg-white/80 hover:bg-white rounded-full shadow-md"
-            onClick={handleNext}
-          >
-            <ChevronRight className="h-6 w-6" />
-            <span className="sr-only">Next</span>
-          </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  )
+    </section>
+  );
+
 }
