@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Ellipse from "../../../../public/assets/Ellipse.svg";
 import UserImg from "../../../../public/assets/bannerUser3.svg";
+import { useQuery } from "@apollo/client";
+import { GET_TESTIMONIALS } from '../../../apollo/queries/testimonialsData'
 
 
 const testimonials = Array(10)
@@ -21,24 +23,14 @@ export default function TestimonialsSection() {
   const [isMobile, setIsMobile] = useState(false);
   const [startX, setStartX] = useState(0);
   const [deltaX, setDeltaX] = useState(0);
-  const [products, setProducts] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const productEndpoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID}/environments/master/entries?access_token=${process.env.NEXT_PUBLIC_CONTENT_DELIVERY_ACCESS_TOKEN}`
 
 
-  async function fetchProducts() {
-    const response = await fetch(productEndpoint);
-    const data = await response.json();
-    return data;
-  }
+  const { data, loading, error } = useQuery(GET_TESTIMONIALS);
+  const products = data?.testimonialsCollection?.items || [];
 
-  useEffect(() => {
-    async function getProducts() {
-      const data = await fetchProducts();
-      setProducts(data.items || []);
-    }
-    getProducts();
-  }, []);
+
+
 
   const desktopCardWidth = 552;
   const cardSpacing = 570;
@@ -54,13 +46,13 @@ export default function TestimonialsSection() {
 
   const nextSlide = () => {
     setActiveIndex((prev) =>
-      prev === testimonials.length - 1 ? 0 : prev + 1
+      prev === products.length - 1 ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setActiveIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
+      prev === 0 ? products.length - 1 : prev - 1
     );
   };
 
@@ -80,17 +72,21 @@ export default function TestimonialsSection() {
     if (!isDragging) return;
     const threshold = 100;
     if (deltaX > threshold) {
-      setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+      setActiveIndex((prev) => (prev - 1 + products.length) % products.length);
     } else if (deltaX < -threshold) {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      setActiveIndex((prev) => (prev + 1) % products.length);
     }
     setIsDragging(false);
     setDeltaX(0);
   };
 
-  if (products.length === 0) {
+  if (loading) {
     return <div>Loading...</div>;
   }
+  if (error) {
+    return <div>Error fetching products</div>;
+  }
+
 
   return (
     <section className="py-8 md:py-16 relative overflow-hidden">
@@ -128,7 +124,7 @@ export default function TestimonialsSection() {
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
                 {products.map((product, index) => (
-                  // const { fields } = product;
+                
                   <div key={index} className="w-full h-[400px] flex-shrink-0 px-2 relative">
                     {activeIndex === index && (
                       <div className="absolute left-0 inset-0 flex justify-center items-center pointer-events-none z-0">
@@ -146,7 +142,7 @@ export default function TestimonialsSection() {
                         }`}
                     >
                       <h3 className="text-xl font-[poppins] font-medium mb-4">
-                        {product.fields?.productName || "Product Name"}
+                        {product.productName || "Product Name"}
                       </h3>
                       <div className="flex items-center mb-4">
                         <div className="w-12 h-12 rounded-full overflow-hidden mr-3 bg-[#f0f8ff]">
@@ -154,16 +150,16 @@ export default function TestimonialsSection() {
                         </div>
                         <div className="flex items-center">
                           <span className="font-medium font-[poppins] mr-2">
-                            {product?.fields.profileName || "User Name"}
+                            {product?.profileName || "User Name"}
                           </span>
                           <span className="text-sm font-[poppins]">
-                            {product?.fields.rating || "4.8"}
+                            {product?.rating || "4.8"}
                           </span>
                           <span className="text-yellow-400 ml-1">★</span>
                         </div>
                       </div>
                       <p className="text-gray-600 font-[inter] text-sm">
-                        {product?.fields.description || "Product review text goes here."}
+                        {product?.description || "Product review text goes here."}
                       </p>
                     </div>
                   </div>
@@ -195,7 +191,6 @@ export default function TestimonialsSection() {
             >
               <div className="absolute w-full mt-10 h-full flex items-center justify-center">
                 {products.map((product, index) => {
-                  const { fields } = product;
                   let distance = index - activeIndex;
                   const totalSlides = products.length;
                   if (distance > totalSlides / 2) {
@@ -206,7 +201,7 @@ export default function TestimonialsSection() {
                   const xPos = distance * 570 + (isDragging ? deltaX : 0);
                   return (
                     <div
-                      key={product.sys.id}
+                      key={product.profileName}
                       className="absolute transition-all duration-300"
                       style={{
                         transform: `translateX(${xPos}px)`,
@@ -224,34 +219,34 @@ export default function TestimonialsSection() {
                         )}
                         <div
                           className={`relative z-10 mx-auto backdrop-blur-3xl bg-white rounded-3xl p-6 transition-all duration-300 ${distance === 0
-                              ? "shadow-[0_0_25px_rgba(112,78,181,0.4)] opacity-100 !bg-[#F5F1FF] flex justify-center flex-col !w-[552px] h-[261px]"
-                              : "shadow-md opacity-70 w-full max-w-[428px]"
+                            ? "shadow-[0_0_25px_rgba(112,78,181,0.4)] opacity-100 !bg-[#F5F1FF] flex justify-center flex-col !w-[552px] h-[261px]"
+                            : "shadow-md opacity-70 w-full max-w-[428px]"
                             }`}
                         >
                           <div className="flex flex-col">
                             <h3 className="text-[25px] font-[poppins] font-normal ">
-                              {fields?.productName || "Product Name"}
+                              {product.productName || "Product Name"}
                             </h3>
                             <h5 className="text-sm text-[#6B6B6B] font-[poppins] font-normal mb-4">
-                              {fields?.storeName || "Store Name"}
+                              {product.storeName || "Store Name"}
                             </h5>
                           </div>
                           <div className="flex items-center mb-4">
                             <div className="w-12 h-12 rounded-full overflow-hidden mr-3 bg-[#f0f8ff]">
-                              <Image src={fields?.avatar || UserImg} alt={fields?.name || "User"} />
+                              <Image src={product.avatar || UserImg} alt={product.name || "User"} />
                             </div>
                             <div className="flex items-center">
                               <span className="text-[20px] font-[poppins] font-normal mr-2">
-                                {fields?.profileName || "User Name"}
+                                {product.profileName || "User Name"}
                               </span>
                               <span className="text-[16px] font-[inter] font-normal">
-                                {fields?.rating || "4.8"}
+                                {product.rating || "4.8"}
                               </span>
                               <span className="text-yellow-400 ml-1">★</span>
                             </div>
                           </div>
                           <p className="text-gray-600 truncate max-w-[900px]  font-[inter] text-sm">
-                            {fields?.description || "Product review text goes here."}
+                            {product.description || "Product review text goes here."}
                           </p>
                         </div>
                       </div>
