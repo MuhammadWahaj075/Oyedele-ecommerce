@@ -1,17 +1,11 @@
 'use client'
 
-import dynamic from "next/dynamic";
 import { ApolloProvider } from "@apollo/client";
-
 import SearchInterface from "./Components/SearchInterface/Page";
+import Testimonials from "./Components/TestimonialCarousel/page";
 import Banner from "./Components/Banner/page";
 import client from '../apollo/client'
 import FoodStoreResults from "./Components/FoodStoreResults/Page";
-
-const Testimonials = dynamic(
-  () => import("./Components/TestimonialCarousel/page"),
-  { ssr: false }
-);
 
 export default function Home() {
   return (

@@ -192,7 +192,7 @@ export default function Testimonials() {
                   const xPos = distance * 570 + (isDragging ? deltaX : 0);
                   return (
                     <div
-                      key={product.profileName}
+                      key={index}
                       className="absolute transition-all duration-300"
                       style={{
                         transform: `translateX(${xPos}px)`,
