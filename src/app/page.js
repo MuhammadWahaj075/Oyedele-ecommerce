@@ -1,9 +1,9 @@
 'use client'
 
 import { ApolloProvider } from "@apollo/client";
-import SearchInterface from "./components/SearchInterface/Page";
-import Testimonials from "./components/TestimonialCarousel/page";
-import Banner from "./components/Banner/page";
+import SearchInterface from "./Components/SearchInterface/Page";
+import Testimonials from "./Components/TestimonialCarousel/page";
+import Banner from "./Components/Banner/page";
 import client from '../apollo/client'
 import FoodStoreResults from "./components/FoodStoreResults/Page";
 
