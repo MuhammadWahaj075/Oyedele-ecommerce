@@ -1,11 +1,11 @@
 'use client'
 
-import FoodStoreResults from "./Components/FoodStoreResults/Page"
-import SearchInterface from "./Components/SearchInterface/Page";
-import Banner from "./Components/Banner/page";
-import Testimonials from "./Components/TestimonialCarousel/page";
 import { ApolloProvider } from "@apollo/client";
+import SearchInterface from "./components/SearchInterface/Page";
+import Testimonials from "./components/TestimonialCarousel/page";
+import Banner from "./components/Banner/page";
 import client from '../apollo/client'
+import FoodStoreResults from "./components/FoodStoreResults/Page";
 
 export default function Home() {
   return (
