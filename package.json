@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint --cache=false ."
+    "start": "next start"
   },
   "dependencies": {
     "@apollo/client": "^3.13.5",
