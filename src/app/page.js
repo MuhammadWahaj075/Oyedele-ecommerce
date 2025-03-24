@@ -5,7 +5,7 @@ import SearchInterface from "./Components/SearchInterface/Page";
 import Testimonials from "./Components/TestimonialCarousel/page";
 import Banner from "./Components/Banner/page";
 import client from '../apollo/client'
-import FoodStoreResults from "./components/FoodStoreResults/Page";
+import FoodStoreResults from "./Components/FoodStoreResults/Page";
 
 export default function Home() {
   return (
