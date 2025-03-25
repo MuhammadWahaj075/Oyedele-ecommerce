@@ -8,17 +8,7 @@ import UserImg from "../../../../public/assets/bannerUser3.svg";
 import { useQuery } from "@apollo/client";
 import { GET_TESTIMONIALS } from '../../../apollo/queries/testimonialsData'
 
-
-const testimonials = Array(10)
-  .fill(null)
-  .map((_, index) => ({
-    name: `Jacob Paul`,
-    rating: 4.8,
-    daysAgo: 1 + (index % 30),
-    text: "Stay ahead with the latest tech! From smart gadgets to cutting-edge accessories, GizmoHub brings you top-quality electronics for every need. Upgrade your lifestyle with innovation at your fingertips!.",
-  }));
-
-export default function TestimonialsSection() {
+export default function TestimonialCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [startX, setStartX] = useState(0);
