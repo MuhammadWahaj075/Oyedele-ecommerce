@@ -84,7 +84,7 @@ export default function Banner() {
           opacity: 1,
         }}
       />
-      <div className=" mx-auto relative px-[24px] sm:px-[24px] md:px-[45px] xl:px-[120px] py-[96.5] z-10">
+      <div className=" mx-auto relative !px-[24px] sm:!px-[24px] md:!px-[45px] xl:!px-[120px] !py-[96.5] z-10">
         <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center relative z-10">
           <div className="flex-1">
             <div className="flex items-center gap-2.5 justify-center md:justify-start ">

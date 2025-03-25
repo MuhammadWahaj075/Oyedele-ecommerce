@@ -28,12 +28,8 @@ export default function TestimonialsSection() {
 
   const { data, loading, error } = useQuery(GET_TESTIMONIALS);
   const products = data?.testimonialsCollection?.items || [];
-
-
-
-
-  const desktopCardWidth = 552;
-  const cardSpacing = 570;
+  // const desktopCardWidth = 552;
+  // const cardSpacing = 570;
 
   useEffect(() => {
     const handleResize = () => {

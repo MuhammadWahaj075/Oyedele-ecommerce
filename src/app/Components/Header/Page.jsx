@@ -18,7 +18,7 @@ export default function Header() {
     >
       <Link href={'/'} className="md:text-2xl text-[22px]  font-[montserrat] flex justify-center items-center font-[600] min-h-[37px] tracking-[.50em]">OYODELE</Link>
 
-      <nav className="hidden lg:flex font-[poppins] !text-[16px] gap-[23] text-sm">
+      <nav className="hidden lg:flex font-[poppins] !text-[16px] !gap-[23] text-sm">
         <Link href="#" className="hover:underline ">Home</Link>
         <div className="flex gap-[5px]">
           <Link href="/stores" className="hover:underline">Stores</Link>
